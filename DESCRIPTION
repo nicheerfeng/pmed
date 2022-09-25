@@ -1,0 +1,39 @@
+Package: pmed
+Title: Accelerate RWD data analysis
+Version: 0.0.1.0
+Authors@R: 
+     person("Teague","Tian",email = "nicheerfeng@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3994-1679"))
+Description: An R package for building virtual datasets to simulate real world
+      medical data in actual production environment, which are mainly used for 
+      related research of RWD projects, including accelerating data analysis 
+      and providing optimized batch functions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+URL: https://github.com/nicheerfeng/pmed,
+    https://nicheerfeng.github.io/pmed/
+BugReprts: https://github.com/nicheerfeng/pmed/issues
+Imports: 
+    dplyr,
+    magrittr,
+    pacman,
+    purrr,
+    rlang,
+    tibble,
+    tidyr,
+    lubridate,
+    stringr,
+    parallel,
+    gtsummary,
+    tidyselect,
+    methods
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+Depends: 
+    R (>= 2.10)
+VignetteBuilder: knitr
