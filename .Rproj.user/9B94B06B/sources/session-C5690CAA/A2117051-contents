@@ -92,8 +92,17 @@ usethis::use_pkgdown()
 use_github_file()
 ## 管理issuse:
 use_github_labels()
-## 2020.07宣布所有的 git 验证，都要求使用基于 token 的验证
-create_github_token()
+
+## 添加origin
+#git remote add main https://github.com/nicheerfeng/pmed
+## 添加token
+# git remote set-url origin https://oauth2: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@github.com/nicheerfeng/pmed.git
+## 推送token：
+# git push -u origin main
+
+## 补充：
+# 以前的github里的master，就是现在的main。
+
 
 # 实现将 pkgdown 站点自动发布到 GitHub 页面所需的 GitHub 设置：
 # 创建新的分支，用于可视化展示站点信息；
@@ -102,9 +111,11 @@ use_pkgdown_github_pages()
 # 构建站点：
 pkgdown::build_site()
 
-usethis::use_git()
-use_github()
-usethis::git_remotes()
+# 关于构建网站之后404原因的解释：
+  
+
+
+
 
 ## 加载指定R包：----
 # 使用import：
