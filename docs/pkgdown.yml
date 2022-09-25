@@ -1,0 +1,10 @@
+pandoc: '2.18'
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  pmed_RWD: pmed_RWD.html
+last_built: 2022-09-25T04:02Z
+urls:
+  reference: https://nicheerfeng.github.io/pmed/reference
+  article: https://nicheerfeng.github.io/pmed/articles
+

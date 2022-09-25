@@ -1,0 +1,286 @@
+## 1 - 创建本地环境并使用renv初始化本地安装环境：----
+library(devtools)
+library(usethis)
+library(roxygen2)
+
+setwd("D:/")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# ## 在指定路径下创建R包：
+usethis::create_package("./")
+
+## 进行本地版本控制：
+# install.packages("renv")
+# 初始化环境
+renv::init()
+# 保存当前所用的包环境，当然我们才刚刚开始开发，别的包都没有引入
+renv::snapshot()
+
+
+## 2 描述文件（description）的常用配置：----
+## Description：
+# Description是对包的描述，每行不超过80个字符，行间使用4个空格分开
+
+## Version：
+# Version表示版本号，版本号最少要有2个整数中间用点号或者横线隔开
+# 推荐的格式：
+# releaesd版本由3个数字构成：<major>.<minor>.<patch>
+#   In-development版本由4个数字构成，第四个是开发版本，从9000开始，所以包的第一个版本是0.0.0.9000
+
+## Auther@R：
+Authors@R:
+  person(given = "First", ## given在前(名)，family在后(姓)
+         family = "Last",
+         role = c("aut", "cre"),
+         # cre creator or maintainer 有问题时应该联系额人
+         # aut 对包贡献最大的人
+         # ctb 贡献者
+         # cph copyright holder nicheerfeng@gmail.com 如果版权是作者以外的人或机构，要注明
+         email = "first.last@example.com",
+         comment = c(ORCID = "YOUR-ORCID-ID"))
+
+## 添加R包：在DESCRIPTION中添加说明文件；
+## 添加依赖的R包：
+# Imports
+# 描述的是包工作所必需的包，在我们的包被安装的时候，
+# 如果这些包之前没有被安装，这个时候会被安装
+# Suggests
+# 不是必需安装的，可能在示例数据，运行测试，
+# 创建vignettes或者包里面只有少量函数使用这些包，
+# 所以我们要在需要这些包的函数里面检查这些包是否安装
+# (requireNamesapce(x,quietly=TRUE))：
+use_package("forcats")
+use_package(package, type = "Imports", min_version = NULL)
+
+##  添加mit-license:
+# 这一步会在三个文件中添加参数：
+# 第一个是在LICENSE中添加字符描述；
+# 第二个是在LICENSE.md中添加详细描述；
+# 第三个是在Description中添加license的字段描述；
+usethis::use_mit_license("MIT license")
+
+
+## 在description中添加指定描述：
+# URL: https://github.com/swsoyee/rPackageTutorial
+# BugReports: https://github.com/swsoyee/rPackageTutorial/issues
+
+## 3 构建函数文件，并执行粗检测：----
+
+## 3.1 创建函数文件 - 在R文件夹中：
+# 在函数体文件中使用roxygen默认骨架：
+# 方法：快捷键是ctrl+shift+alt+r;
+# 打开生成的函数体文件，并把光标放在指定函数的内部，然后使用
+# Code>Insert roxygen skeleton　或者ctrl+shift+alt+r即可；
+# 严格要求：需要将函数进行{}的另外一个括号，使用enter进行跨行才可以；
+use_r("test2")
+
+## 3.2 函数骨架的构建：
+## 常规顺序是：
+# 函数名、描述(Description)、函数体(Usage)、参数(Arguments)、
+# 详情补充(Details)、输出值(Value)、举例(Examples)、
+#
+# 其中：
+# 默认常规顺序是：
+# 1 函数名
+# 2 描述(Description)
+# 3 详情补充(Details)
+# 3.1 补充说明(see also) @seealso
+#
+# 次参数顺序：
+# 4 参数(Arguments) -- @param
+# 5 输出值(value) -- @return
+# 6 举例(Examples) -- @examples
+
+## 补充；
+# 在同一函数架构中设计两套或者多套函数，以及函数的辅助函数；
+# 同一函数类型下，有多个子函数类型，共用一个参数体系：
+# 使用
+#' @rdname tr -- 其中tr为主函数；
+# 同一函数类型下，有多个辅助函数，共用一个参数体系：
+# 直接关闭export（不懈#' export）：
+# 在已有构建的函数下面直接写函数即可；
+
+## 补充 -- 添加额外描述：
+## 在描述中添加代码的另外一种方法：
+# 使用 `summary()` 添加重点突出；
+# 使用[summary()]  添加引用，可跳转；如果找不到跳转就表示为重点突出；
+# 使用[RStudio Cloud](https://rstudio.cloud)
+
+## 其他辅助参数：
+#' @aliases alias1 alias2 ... 添加额外的别名，可以使用?
+#' @keywords keyword1 keyword2 ...添加关键词
+#' @inheritParams 集成该R包的主函数功能；主要用于该R文件内的函数继承。
+
+#' @details \code{corrplot} function offers flexible ways to visualize
+#'   correlation matrix, lower and upper bound of confidence interval matrix.
+#'
+#' @references
+#' Michael Friendly (2002).
+#' \emph{Corrgrams: Exploratory displays for correlation matrices}.
+#' The American Statistician, 56, 316--324.
+#'
+#' D.J. Murdoch, E.D. Chow (1996).
+#' ## \emph表示用于斜体；
+#' \emph{A graphical display of large correlation matrices}.
+#' The American Statistician, 50, 178--180.
+#'
+#' @author Taiyun Wei (weitaiyun@@gmail.com)
+#' @author Viliam Simko (viliam.simko@@gmail.com)
+#' @author Michael Levy (michael.levy@@healthcatalyst.com)
+#'
+#' @note \code{Cairo} and \code{cairoDevice} packages is strongly recommended to
+#'   produce high-quality PNG, JPEG, TIFF bitmap files, especially for that
+#'   \code{method} \code{circle}, \code{ellipse}.
+#'
+#' @note Row- and column names of the input matrix are used as labels rendered
+#'   in the corrplot. Plothmath expressions will be used if the name is prefixed
+#'   by one of the following characters: \code{:}, \code{=} or \code{$}.
+#'   For example \code{':alpha + beta'}.
+#'
+#' @seealso Function \code{plotcorr}  in the \code{ellipse} package and
+#'   \code{corrgram}  in the \code{corrgram} package have some similarities.
+#'
+#'   Package \code{seriation} offered more methods to reorder matrices, such as
+#'   ARSA, BBURCG, BBWRCG, MDS, TSP, Chen and so forth.
+#'
+#' @example vignettes/example-corrplot.R
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 补充：web网页说明中添加参数说明：
+# Description:
+# 在描述中添加代码：
+# \code{sum} returns the sum
+# 在描述中添加引用函数：
+# \code{\link{Summary}}
+
+## 辅助函数 :字符和函数标注：
+# 如下所示：
+# ``  和[]可以进行参数标注，用于函数体标注；
+#`read_excel()` calls [excel_format()]
+# R包内部引用的方法如下：See function \code{\link{corrMatOrder}} for details.
+# @import graphics grDevices stats  -- 指定加载的R包；
+
+# 在描述中添加链接：
+# \url{https://en.wikipedia.org/wiki/Integer_overflow}
+
+## 3.3 加载与测试R包中的所有函数；
+devtools::load_all() # - 快捷键Ctrl + Shift + L ；
+## 执行测试：
+a <- factor(c("character", "hits", "your", "eyeballs"))
+b <- factor(c("but", "integer", "where it", "counts"))
+fbind(a,b)
+
+## 3.4 基于document来生成man/fbind.Rd文件
+devtools::document() # -- Ctrl + Shift + D
+# 一般做完这一步可以执行一次函数检查；
+## document()之后就可以使用?fbind来查看函数描述文档：
+?sum2
+
+## 4 单元测试 ----
+## 4.1 函数介绍：
+# 使用testthat包：
+# context  写一个简短的介绍文件中的测试内容
+#
+# expect_equal()是基于all.equal()的 - 相对估计；
+# expect_identical()是基于identical - 相对精准；
+# expect_match 是基于grepl，识别字符使用；
+# expect_output()匹配输出类型；
+# expect_message()检查信息；
+# expect_warning()检查warning；
+# expect_error()检查错误
+# expect_is()检查某个对象是不是继承自一个特定的类：
+# expect_true() and expect_false() 当没有其他的expectation可用时使用
+
+## 4.2 函数具体测试：----
+## expect_is() 检查某个对象是不是继承自一个特定的类：
+model <- lm(mpg ~ wt, data = mtcars)
+class(model)
+#[1] "lm"
+expect_is(model, "lm")
+
+## 匹配输出类型：
+a <- list(1:10, letters)
+str(a)
+# List of 2
+# $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
+# $ : chr [1:26] "a" "b" "c" "d" ...
+expect_output(str(a), "List of 2")
+
+## 4.3 运行检查的流程 ----
+## 检查R包整体的运行：
+devtools::check() # -Ctrl + Shift + E
+
+
+##
+
+
+## 5 构建及安装R包： ----
+## 将函数打包，构建成默认的R包：
+devtools::build()
+
+## 然后就可以通过install()函数来安装这个包：
+devtools::install()
+library(tdftest)
+a = c('a')
+b = c('b')
+fbind(a,b)
+
+## 另外一种本地安装的方法为：
+install.packages("~/test/tdftest.tar.gz", repos = NULL, type = "source")
+
+## 6 添加案例数据：----
+## 6.1 三种添加数据的方法：----
+# 如果想要在包中包含二进制数据，并且可以被用户使用，将这些数据放在data/文件夹中，这是放示例数据的最好的地方；
+# 直接将数据在其他函数体中引用，需要给出相对路径即可；
+
+# 如果想要包含解析后的数据，并且用户不可以使用，
+# 将这些数据放到R/sysdata.rda，这些数据可以是函数运行所需要的
+x <- sample(1000)
+usethis::use_data(x, mtcars, internal = TRUE)
+
+# 如果想要存储原始数据，可以放到inst/extdata里面
+usethis::use_data_raw()
+
+## 6.2 添加数据后的数据描述 ----
+# 添加数据后是放置在R/data.R文件中对数据展开描述：
+# 对数据进行document有额外的两个tag:
+#' @format 是对数据的overview，包含对每个变量的说明
+#' @source 是对数据来源的说明，通常是网址\url{}
+
+## 7 其他辅助功能：----
+
+## 添加说明文件：
+usethis::use_readme_md()
+
+## 增加 NEWS 页面，用于记录每一次升级所做出的变更
+usethis::use_news_md()
+# 添加 Code of Conduct
+# 根据弹出的提示，把自动生成的内容添加到 README.Rmd 中并且重新生成 README.md 后提交本次变更
+usethis::use_code_of_conduct()
+
+
+## 使用styler进行代码美化：
+install.packages("styler")
+styler::style_pkg()
+
+## 代码规范：
+## install.packages("lintr")
+# 对整个包进行不符合规范的代码查询
+lintr::lint_package()
+
+
+

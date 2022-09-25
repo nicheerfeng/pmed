@@ -1,0 +1,127 @@
+## 创建R包的流程：
+
+library(devtools)
+library(usethis)
+library(roxygen2)
+library(tidyverse)
+library(lubridate)
+library(gtsummary)
+
+## 搭建前期环境 ----
+getwd()
+setwd("D:/github_storehouse/pmed/")
+setwd("D:/nicheerT/pmed/")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# ## 在指定路径下创建R包：
+usethis::create_package("../pmed")
+
+# 配置本地的github：
+# nicheerfengt@gmail.com
+# ahbde7426
+
+## 进行本地版本控制：
+# install.packages("renv")
+# 初始化环境
+# renv::init()
+
+## 添加常用配置：----
+## 添加默认许可：
+usethis::use_mit_license("MIT license")
+
+## 添加说明文件：
+usethis::use_readme_md()
+
+## 增加 NEWS 页面，用于记录每一次升级所做出的变更
+usethis::use_news_md()
+# 添加 Code of Conduct
+# 根据弹出的提示，把自动生成的内容添加到 README.Rmd 中并且重新生成 README.md 后提交本次变更
+usethis::use_code_of_conduct()
+
+## 在R包中使用非标准计算：
+# usethis::use_tidyeval()
+# Helper functions
+
+
+## 构建函数体：-----
+## 创建辅助函数文件 - 在R文件夹中：
+use_r("load_pkg")  #  --R包引入；
+use_r("tr") # 批量参数转换
+use_r("virtual_med_mulp") # 构建虚拟数据集；
+use_r("data_med") ## 给生成的虚拟数据集添加说明
+
+## 常用快捷函数：
+use_r("pe") # -- 统计患者人数；
+use_r("label_cut") #  返回给定分组序列的标签；
+use_r("calcu_med") # 计算给定数据框内部连续变量（mean(sd)）和非连续变量(pop(perc))的参数值；
+use_r("wider_clean")
+
+
+## 常用医学函数：
+use_r("add_cutcolumn") # 为连续数据提供分组；
+use_r("cala_age") # 计算患者年龄：
+use_r("mean_sd_pop_perc") ## 计算平均值和标准差；人数和比例；
+
+## 加载函数，做内部测试：----
+devtools::load_all()
+
+## 构建每个函数的参数页说明文档：
+devtools::document()
+
+## 构建虚拟数据集 ----
+# 在构建虚拟数据集中不能使用R包内构建的辅助函数；
+#' @format A list of dataframes;
+# internal = FALSE是将数据集存储在data下，并存储成为一个单独的rda文件；
+# usethis::use_data(data_med,internal = FALSE,overwrite = TRUE)
+
+## 检查及构筑R包：----
+devtools::check()
+
+devtools::build()
+
+devtools::install()
+
+install.packages("~/test/tdftest.tar.gz", repos = NULL, type = "source")
+
+## 添加vignette：
+usethis::use_vignette("pmed_RWD")
+
+## 添加pkg：
+library(usethis)
+usethis::use_pkgdown()
+## 安装远程厂库到本地：
+use_github_file()
+## 管理issuse:
+use_github_labels()
+## 2020.07宣布所有的 git 验证，都要求使用基于 token 的验证
+create_github_token()
+
+# 实现将 pkgdown 站点自动发布到 GitHub 页面所需的 GitHub 设置：
+# 创建新的分支，用于可视化展示站点信息；
+use_pkgdown_github_pages()
+
+# 构建站点：
+pkgdown::build_site()
+
+usethis::use_git()
+use_github()
+usethis::git_remotes()
+
+## 加载指定R包：----
+# 使用import：
+## 添加R包：在DESCRIPTION中添加说明文件；
+use_package("pacman", type = "Imports", min_version = NULL)
+use_package("tibble", type = "Imports", min_version = NULL)
+use_package("dplyr", type = "Imports", min_version = NULL)
+use_package("tidyr", type = "Imports", min_version = NULL)
+use_package("magrittr", type = "Imports", min_version = NULL)
+use_package("tidyr", type = "Imports", min_version = NULL)
+use_package("rlang", type = "Imports", min_version = NULL)
+use_package("purrr", type = "Imports", min_version = NULL)
+use_package("ggplot2", type = "Imports", min_version = NULL)
+use_package("stringr", type = "Imports", min_version = NULL)
+use_package("parallel", type = "Imports", min_version = NULL)
+use_package("snowfall", type = "Imports", min_version = NULL)
+use_package("gtsummary", type = "Imports", min_version = NULL)
+
+devtools::document(roclets = c('rd', 'collate', 'namespace'))
+
