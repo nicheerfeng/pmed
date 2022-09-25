@@ -1,5 +1,7 @@
 ---
 title: "pmed_RWD"
+author: "Teague Tian"
+date: "r Sys.Date"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pmed_RWD}
