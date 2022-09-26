@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   pmed_RWD: pmed_RWD.html
-last_built: 2022-09-25T05:38Z
+last_built: 2022-09-26T02:15Z
 urls:
   reference: https://nicheerfeng.github.io/pmed/reference
   article: https://nicheerfeng.github.io/pmed/articles
