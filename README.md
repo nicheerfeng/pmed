@@ -15,6 +15,10 @@
 You can install the development version of pmed from [GitHub](https://github.com/) with:
 
 ``` r
+# waring：
+`rlang` > 1.0.2 is a prerequisite for installing this R package
+It is recommended that you use R version later than 4.2
+
 # install.packages("devtools")
 devtools::install_github("nicheerfeng/pmed")
 ```
