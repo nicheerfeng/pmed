@@ -3,7 +3,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-## Goal: -test
+## Goal: 
 
   An R package for building virtual datasets to simulate real world
   medical data in actual production environment, which are mainly used for 
@@ -97,6 +97,19 @@ breaks_age <- c(18,30,40,50,60,70,Inf)
 cut_label(breaks_age)
 cut_label(breaks_age,2)
 ```
+
+**Calculate patient medication non overlapping time**
+``` r
+## Build data
+prec_data = data_med$prec %>% 
+  mutate(prec_end_date = as.Date(prec_date) + sample(1:30,1)) %>% 
+  rename(prec_start_date = prec_date)
+
+interval_real_period(prec_data,patient_id = "patient_id",
+                     st_dates = "prec_start_date",
+                     end_dates = "prec_end_date")
+```
+
 
 **Add corresponding classified data columns to one or more consecutive data** 
 ``` r

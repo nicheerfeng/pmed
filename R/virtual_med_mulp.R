@@ -143,7 +143,6 @@ Virtual_med_one = function(birth_start_date,birth_end_date,
     mutate(Discharge_date = admission_date%m+% days(sample(3:45,size =1,replace = T)))
 
 
-
   ## Generate random lab table：----
 
   g_rand_lab = function(n){
