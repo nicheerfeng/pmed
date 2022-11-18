@@ -69,9 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>pmed_RWD</h1>
-                        <h4 data-toc-skip class="author">Teague Tian</h4>
             
-            <h4 data-toc-skip class="date">r Sys.Date</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/nicheerfeng/pmed/blob/HEAD/vignettes/pmed_RWD.Rmd" class="external-link"><code>vignettes/pmed_RWD.Rmd</code></a></small>
       <div class="d-none name"><code>pmed_RWD.Rmd</code></div>
@@ -84,7 +82,10 @@
 <div class="section level2">
 <h2 id="goal">Goal:<a class="anchor" aria-label="anchor" href="#goal"></a>
 </h2>
-<p>An R package for building virtual datasets to simulate real world medical data in actual production environment, which are mainly used for related research of RWD projects, including accelerating data analysis and providing optimized batch functions.</p>
+<p>An R package for building virtual datasets to simulate real world
+medical data in actual production environment, which are mainly used for
+related research of RWD projects, including accelerating data analysis
+and providing optimized batch functions.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -112,7 +113,8 @@
 <span>    birth_start_date <span class="op">=</span> <span class="st">"1980-01-01"</span>,birth_end_date <span class="op">=</span><span class="st">"2000-12-31"</span> ,</span>
 <span>   study_start_date <span class="op">=</span> <span class="st">"2014-01-01"</span>,study_end_date <span class="op">=</span><span class="st">"2020-12-31"</span>,</span>
 <span>   average_year_visit_n <span class="op">=</span> <span class="fl">6</span>,ncores<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Load virtual medical records for 50 virtual patients</strong></p>
+<p><strong>Load virtual medical records for 50 virtual
+patients</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data_med</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quick conversion of common parameters</strong></p>
@@ -120,7 +122,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data_med</span><span class="op">)</span></span>
 <span><span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/tr.html">tr</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"patient_id"</span>,<span class="st">"visit_id"</span><span class="op">)</span>,<span class="st">"cha"</span><span class="op">)</span></span>
 <span><span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/tr.html">tr_nst</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">patient_id</span>,<span class="va">num</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Calculate the average and standard deviation of continuous variables</strong></p>
+<p><strong>Calculate the average and standard deviation of continuous
+variables</strong></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data_med</span><span class="op">)</span></span>
 <span><span class="va">pat_table</span> <span class="op">=</span> <span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/calcu_age.html">calcu_age</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">birthdate</span><span class="op">)</span></span>
@@ -131,7 +134,8 @@
 <div class="section level3">
 <h3 id="aggregate-function-suitable-for-rwd-descriptive-statistics">Aggregate function suitable for RWD descriptive statistics<a class="anchor" aria-label="anchor" href="#aggregate-function-suitable-for-rwd-descriptive-statistics"></a>
 </h3>
-<p><strong>Quick statistics on the number of patients in the table</strong></p>
+<p><strong>Quick statistics on the number of patients in the
+table</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datatable1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>patient_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"patent"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>,</span>
@@ -157,13 +161,26 @@
 <span><span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/calcu_age.html">calcu_age</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">birthdate</span><span class="op">)</span></span>
 <span><span class="co">## Calculate the age of the patient based on the index date</span></span>
 <span><span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/calcu_age.html">calcu_age</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">birthdate</span>,<span class="va">index_date</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Generate label function developed for <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">base::cut()</a></code></strong></p>
+<p><strong>Generate label function developed for
+<code><a href="https://rdrr.io/r/base/cut.html" class="external-link">base::cut()</a></code></strong></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">breaks_age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>,<span class="fl">30</span>,<span class="fl">40</span>,<span class="fl">50</span>,<span class="fl">60</span>,<span class="fl">70</span>,<span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/cut_label.html">cut_label</a></span><span class="op">(</span><span class="va">breaks_age</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/cut_label.html">cut_label</a></span><span class="op">(</span><span class="va">breaks_age</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Add corresponding classified data columns to one or more consecutive data</strong></p>
+<p><strong>Calculate patient medication non overlapping
+time</strong></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Build data</span></span>
+<span><span class="va">prec_data</span> <span class="op">=</span> <span class="va">data_med</span><span class="op">$</span><span class="va">prec</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>prec_end_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">prec_date</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">rename</span><span class="op">(</span>prec_start_date <span class="op">=</span> <span class="va">prec_date</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/interval_real_period.html">interval_real_period</a></span><span class="op">(</span><span class="va">prec_data</span>,patient_id <span class="op">=</span> <span class="st">"patient_id"</span>,</span>
+<span>                     st_dates <span class="op">=</span> <span class="st">"prec_start_date"</span>,</span>
+<span>                     end_dates <span class="op">=</span> <span class="st">"prec_end_date"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Add corresponding classified data columns to one or more
+consecutive data</strong></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for one</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data_med</span><span class="op">)</span></span>
 <span><span class="va">pat</span> <span class="op">=</span> <span class="va">data_med</span><span class="op">$</span><span class="va">pat</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/calcu_age.html">calcu_age</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">birthdate</span><span class="op">)</span></span>
@@ -197,8 +214,9 @@
 <span><span class="va">list_cut</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">HbA1c</span>,<span class="va">HDL</span>,<span class="va">LDL</span>,<span class="va">TC</span>,<span class="va">TG</span>,<span class="va">WBC</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cut_dataframe</span> <span class="op">=</span> <span class="fu"><a href="../reference/mmc.html">mmc</a></span><span class="op">(</span><span class="va">lab_wider</span>,<span class="va">lib_name_list</span>,<span class="va">list_cut</span>,digits<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><strong>use <code>gtsummary</code> to faster descriptive statistics</strong></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<p><strong>use <code>gtsummary</code> to faster descriptive
+statistics</strong></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Add a missing data to fully demonstrate the function of the function</span></span>
 <span><span class="va">lab_wider_cut</span> <span class="op">=</span> <span class="va">cut_dataframe</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">.</span>,</span>
@@ -208,16 +226,18 @@
 <span></span>
 <span><span class="co">## faster descriptive statistics.</span></span>
 <span><span class="va">data_lab_calcu</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcu.html">calcu</a></span><span class="op">(</span><span class="va">lab_wider_cut</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lab_wider</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Extract the statistical summary generated by <code>calcu</code> for continuous data</strong></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Statistical results of a single indicator</span></span>
+<p><strong>Extract the statistical summary generated by
+<code>calcu</code> for continuous data</strong></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Statistical results of a single indicator——test</span></span>
 <span><span class="va">bind_cut_cont_test</span> <span class="op">=</span> <span class="fu"><a href="../reference/bind_cut_cont.html">bind_cut_cont</a></span><span class="op">(</span><span class="va">data_lab_calcu</span>,<span class="st">"HbA1c"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Statistical results of multiple indicators</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_df</a></span><span class="op">(</span><span class="va">lib_name_list</span>,<span class="va">bind_cut_cont</span>,</span>
 <span>              gt_table_body <span class="op">=</span> <span class="va">data_lab_calcu</span>,ppop<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Extract the statistical summary generated by <code>calcu</code> for classified data</strong></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p><strong>Extract the statistical summary generated by
+<code>calcu</code> for classified data</strong></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">data_med</span><span class="op">)</span></span>
 <span><span class="va">diags</span> <span class="op">=</span> <span class="va">data_med</span><span class="op">$</span><span class="va">diag</span></span>
 <span><span class="va">aim_select</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"patient_id"</span>,<span class="st">"visit_id"</span>,<span class="st">"diag_union"</span><span class="op">)</span></span>
